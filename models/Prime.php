@@ -8,6 +8,7 @@ class Prime
 
     public function __construct()
     {
+        // start with some sane defaults
         $this->primes = array();
     }
 
@@ -30,6 +31,16 @@ class Prime
         // assume sane defaults
         if ($num < 2) {
             return false;
+        }
+
+        // primes can only end in four digits if larger than 10
+        if ($num > 10) {
+            $toCheck = array(1, 3, 7, 9);
+            $lastDigit = $num % 10;
+
+            if (!in_array($lastDigit, $toCheck)) {
+                return false;
+            }
         }
 
         // go through all the primes we have
